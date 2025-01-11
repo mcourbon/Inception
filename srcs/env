@@ -1,0 +1,15 @@
+SQL_DATABASE        =   my_database
+SQL_USER            =   mcourbon
+SQL_PWD             =   mcourbon42
+SQL_ROOT_PWD        =   mcourbon42
+WP_PATH             =   /var/www/wordpress
+WP_URL              =   mcourbon.42.fr
+WP_TITLE            =   My Wordpress Site
+WP_ADMIN_USER       =   mcourbon
+WP_ADMIN_PWD        =   mcourbon42
+WP_ADMIN_EMAIL      =   mcourbonadmin@gmail.com
+WP_USER             =   mcourbonmac
+WP_USER_PWD         =   mcourbon42
+WP_USER_EMAIL        =   mcourbonuser@gmail.com
+WP_VOLUME_PATH      =   /home/mcourbon/data/Wordpress
+MARIADB_VOLUME_PATH =   /home/mcourbon/data/mariadb
