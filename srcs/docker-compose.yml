@@ -1,9 +1,13 @@
+# Définie les différents services du docker compose
 services:
   mariadb:
+    # Définie le nom du docker qui sera créer
     container_name: mariadb
+    # indique l'image de nginx a utiliser
     image: mariadb
     networks:
       - inception
+    # indique le répertoire et le nom du docker a build puis transmet les args de construction du docker mariadb
     build:
       context: requirements/mariadb
       dockerfile: Dockerfile
@@ -16,6 +20,7 @@ services:
     volumes:
       - mariadb:/var/lib/mysql
     restart: unless-stopped
+    # Créer une communication entre le docker mariadb et les container du meme reseau inception
     expose:
       - "3306"
     healthcheck:
@@ -36,9 +41,12 @@ services:
         WP_PATH: $WP_PATH
         WP_URL: $WP_URL
     env_file: .env
+    # Créer un volume
     volumes:
       - wordpress:/var/www/wordpress
+    # redémarre le docker en cas d'échec
     restart: on-failure
+    # Créer une communication entre le docker ngin et la vm, sur le port 443
     ports:
       - "443:443"
     depends_on:
@@ -64,6 +72,7 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "exit 0"]
 
+# créer des volumes ou sera stocker les données pour avoir une persistance des données quand on stop les dockers
 volumes:
   wordpress:
     driver: local
@@ -78,6 +87,7 @@ volumes:
       o: 'bind'
       device: $MARIADB_VOLUME_PATH
 
+# permet de connecter les différents services entre eux dans le réseau inception
 networks:
   inception:
     driver: bridge

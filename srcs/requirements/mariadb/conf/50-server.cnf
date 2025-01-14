@@ -4,10 +4,10 @@
 # this is read by the standalone daemon and embedded servers
 [server]
 
-# this is only for the mysqld standalone daemon
+# Indique que les paramètres suivants s'appliquent à la configuration de MySQL
 [mysqld]
 
-# * Basic Settings
+# * Parametre basique
 user = mysql
 pid-file = /run/mysqld/mysqld.pid
 basedir = /usr
@@ -18,6 +18,8 @@ lc-messages = en_US
 socket = /run/mysqld/mysqld.sock
 skip-external-locking
 
+# Configure l'adresse IP à laquelle le serveur MySQL/MariaDB sera lié
+# En utilisant "*", le serveur écoute sur toutes les adresses IP disponibles de la machine hôte (VM)
 bind-address            = *
 port 					= 3306
 

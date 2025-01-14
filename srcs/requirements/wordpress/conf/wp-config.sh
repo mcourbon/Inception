@@ -1,13 +1,13 @@
 # !/bin/bash
 
-# Only if wp-config.php doesnt already exist
+# Seulement si wp-config.php n'existe pas deja
 if [ ! -f "${WP_PATH}/wp-config.php" ]; then
 
-  # Wordpress install
+  # Wordpress installation
   wp core download --path=$WP_PATH --allow-root
   echo "core downloaded" >&2
   sleep 10
-  # Wordpress config initialization
+  # Wordpress initialisation
   wp config create --allow-root \
     --dbname=$SQL_DATABASE \
     --dbuser=$SQL_USER \
@@ -16,7 +16,7 @@ if [ ! -f "${WP_PATH}/wp-config.php" ]; then
     --path=$WP_PATH
   echo "wp-config.php created"
   echo "Setting up admin" >&2
-  # More wordpress config, admin user (mcourbon)
+  # Config wordpress et admin user (mcourbon)
   wp core install --allow-root \
     --url="${WP_URL}" \
     --title="${WP_TITLE}" \
@@ -25,7 +25,7 @@ if [ ! -f "${WP_PATH}/wp-config.php" ]; then
     --admin_email="${WP_ADMIN_EMAIL}" \
     --path=$WP_PATH
   echo "Setting up user" >&2
-  # user creation (mcourbonmac)
+  # Creation du user (mcourbonmac)
   wp user create $WP_USER $WP_USER_EMAIL \
     --user_pass=$WP_USER_PWD \
     --allow-root \
@@ -39,7 +39,7 @@ fi
 chown -R www-data:www-data /var/www/wordpress/
 chown -R www-data:www-data /var/www/wordpress/wp-content/
 
-# Run PHP
+# Lance PHP
 mkdir -p /run/php
 echo "Inception launched" >&2
 php-fpm7.4 -F

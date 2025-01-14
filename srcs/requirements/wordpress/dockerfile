@@ -1,7 +1,11 @@
+# Indique l'OS sur lequel l'image Docker mariaDB sera construite.
 FROM debian:11
 
+# Mise à jour du système de paquets.
 RUN apt-get update && apt-get upgrade -y
+# instalation du paquets wget qui permet de telecharger des fihiers depuis internet
 RUN apt-get -y install wget
+# instalation des paquets php
 RUN apt-get install -y php7.4
 RUN apt-get install -y php-fpm
 RUN apt-get install -y php-mysql
@@ -10,6 +14,7 @@ RUN apt-get install -y msmtp
 
 COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
+# commande pour installer le cli qui gere wordpress
 RUN	wget https://github.com/wp-cli/wp-cli-bundle/releases/download/v2.7.0/wp-cli-2.7.0.phar
 RUN chmod +x wp-cli-2.7.0.phar
 RUN mv wp-cli-2.7.0.phar /usr/local/bin/wp
@@ -17,6 +22,8 @@ RUN mv wp-cli-2.7.0.phar /usr/local/bin/wp
 COPY conf/wp-config.sh /etc/run/
 RUN chmod +x /etc/run/wp-config.sh
 
+# Définit la commande par défaut à exécuter lorsque le conteneur démarre.
 CMD ["bash", "/etc/run/wp-config.sh"]
 
+# Permet aux autres conteneurs ou à des applications externes de se connecter à wordpress via ce port.
 EXPOSE 9000

@@ -1,7 +1,7 @@
 #get env variables
 include srcs/.env
 
-#build rule
+#build rule, -f specifie le fichier, up demarre les servicesm --build fore la reconstruction des images avant de demarrer les services
 all:	$(WP_VOLUME_PATH) $(MARIADB_VOLUME_PATH)
 		docker compose -f ./srcs/docker-compose.yml up --build
 
